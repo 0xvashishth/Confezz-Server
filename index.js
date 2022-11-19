@@ -4,6 +4,7 @@ var cors = require('cors');
 const app = express();
 const connectDB = require('./config/db');
 
+const userR = require("./routes/user-routes");
 
 //body-parse
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
@@ -19,22 +20,12 @@ connectDB();
 app.use(express.json({ extended: false }));
 app.use(express.json());
 
-const middleware = (req, res, next) => {
-  console.log("Hello my middleware");
-  next();
-}
-
-
 app.get('/', (req, res) => {
-  console.log("Hello Askoverflosw!!");
-  res.send('Hello Askoverflosw!!')
+  console.log("Welcome to Confezz!!");
+  return res.status(200).json({ message: 'Welcome to Confezz!!' });
 });
 
-app.get('/contact', middleware, (req, res) => {
-  console.log("Hello my contact");
-  res.send('Hello Contact')
-});
-
+app.use("/api/user", userR);
 
 
 const port = process.env['PORT'] || 5000;
