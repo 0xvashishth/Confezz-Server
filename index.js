@@ -1,18 +1,19 @@
 const express = require('express');
-// const connectDB = require('./config/db');
+const bodyParser = require('body-parser');
 var cors = require('cors');
-const bodyParser = require('body-parser')
-
 const app = express();
+const connectDB = require('./config/db');
+
+
 //body-parse
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+
 // cors 
 app.use(cors({ origin: true, credentials: true }));
 
 // Connect Database
-// connectDB();
-
+connectDB();
 
 // Init Middleware
 app.use(express.json({ extended: false }));
@@ -34,6 +35,7 @@ app.get('/contact', middleware, (req, res) => {
   res.send('Hello Contact')
 });
 
-const port = process.env.PORT || 8082;
 
+
+const port = process.env['PORT'] || 5000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
