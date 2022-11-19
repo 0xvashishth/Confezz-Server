@@ -11,7 +11,7 @@ router.get("/", userC.getAllUser);
 router.post("/signup", registerValiations, userC.signup);
 
 // User Login
-// router.post("/login", loginValiations, userC.login);
+router.post("/login", loginValiations, userC.login);
 
 // Curently logged in user
 // router.get("/me", protect, userC.getMe);

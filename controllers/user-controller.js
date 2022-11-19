@@ -4,6 +4,7 @@ const User = require('../models/Users.js');
 const jwt = require('jsonwebtoken');
 
 const getAllUser = async (req, res, nxt) => {
+
   let users;
   try {
     users = await User.find();
@@ -17,7 +18,7 @@ const getAllUser = async (req, res, nxt) => {
 }
 
 const registerValiations = [
-  body('name').not().isEmpty().trim().withMessage('Name is required'),
+  body('nickname').not().isEmpty().trim().withMessage('NickName is required'),
   body('email').not().isEmpty().trim().withMessage('Email is required'),
   body('password')
     .isLength({ min: 6 })
@@ -65,7 +66,7 @@ const signup = async (req, res, nxt) => {
     console.log(err);
     return res.status(500).json({ errors: err });
   }
-  return res.status(201).json({ _id: newUser.id, user: newUser, token: generateToken(newUser), message: 'User created successfully' });
+  return res.status(201).json({ _id: newUser.id, user: newUser, message: 'User created successfully' });
 }
 
 const loginValiations = [
@@ -86,8 +87,9 @@ const login = async (req, res, nxt) => {
     const existingUser = await User.findOne({ email: email });
     if (existingUser) {
       const matched = await bcrypt.compare(password, existingUser.password);
+      const token = await existingUser.generateAuthToken();
       if (matched) {
-        return res.status(200).json({ _id: existingUser.id, user: existingUser, token: generateToken(existingUser), message: 'User logged in successfully' });
+        return res.status(200).json({ _id: existingUser.id, user: existingUser, token: token, message: 'User logged in successfully' });
       }
       else {
         return res.status(401).json({ errors: [{ msg: 'Password is not correct' }] });

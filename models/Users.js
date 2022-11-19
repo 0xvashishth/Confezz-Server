@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const jwt = require('jsonwebtoken');
 const secret_key = process.env['JWT_SECRET'];
 
 const userSchema = new Schema({
