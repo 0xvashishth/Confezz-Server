@@ -1,5 +1,6 @@
 const User = require('../models/Users.js');
 const Confess = require('../models/Confess.js');
+const Comment = require('../models/Comment.js');
 const formidable = require("formidable");
 const mongoose = require("mongoose");
 
@@ -77,7 +78,8 @@ const getConfessionById = async (req, res, nxt) => {
   const { cid } = req.params;
   try {
     const confession = await Confess.findOne({ _id: cid });
-    return res.status(200).json({ confession });
+    const comments = await.Comment.find({ confessId: confession._id }).sort({ updatedAt: -1 });
+    return res.status(200).json({ confession, comments });
   } catch (error) { return res.status(500).json({ errors: error, msg: error.message }) }
 }
 
