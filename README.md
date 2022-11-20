@@ -2,10 +2,10 @@
 
 # Confezz 🤫
 
-<a href="https://github.com/vasu-1/Confezz-Client"><img src="https://sloc.xyz/github/vasu-1/Confezz-Client?style=for-the-badge" alt="total lines"/></a>
-<a href="https://github.com/vasu-1/Confezz-Client"><img src="https://img.shields.io/github/stars/vasu-1/Confezz-Client" alt="Stars"/></a>
-<a href="https://github.com/vasu-1/Confezz-Client/network/members"><img src="https://img.shields.io/github/forks/vasu-1/Confezz-Client" alt="Forks"/></a>
-<a href="https://github.com/vasu-1/Confezz-Client/commits"><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/vasu-1/Confezz-Client?logo=github"></a>
+<a href="https://github.com/vasu-1/Confezz-Server"><img src="https://sloc.xyz/github/vasu-1/Confezz-Server?style=for-the-badge" alt="total lines"/></a>
+<a href="https://github.com/vasu-1/Confezz-Server"><img src="https://img.shields.io/github/stars/vasu-1/Confezz-Server" alt="Stars"/></a>
+<a href="https://github.com/vasu-1/Confezz-Server/network/members"><img src="https://img.shields.io/github/forks/vasu-1/Confezz-Server" alt="Forks"/></a>
+<a href="https://github.com/vasu-1/Confezz-Server/commits"><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/vasu-1/Confezz-Server?logo=github"></a>
 </div>
 
 ---
