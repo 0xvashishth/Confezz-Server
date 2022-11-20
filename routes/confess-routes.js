@@ -5,3 +5,10 @@ const auth = require("../middleware/auth");
 
 // Get all confession
 router.get("/", confessC.getAllConfession);
+
+// Create Confession
+router.post("/new", confessC.createConfession);
+
+// 
+
+module.exports = router;
