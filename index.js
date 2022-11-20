@@ -1,4 +1,5 @@
 const express = require('express');
+require("dotenv").config();
 const bodyParser = require('body-parser');
 var cors = require('cors');
 const app = express();
@@ -29,5 +30,5 @@ app.get('/', (req, res) => {
 app.use("/api/user", userR);
 app.use("/api/confess", confessR);
 
-const port = process.env['PORT'] || 5000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
