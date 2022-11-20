@@ -11,3 +11,6 @@ const protect = async (req, res, next) => {
     return res.status(401).json({ errors: [{ msg: error.message }] });
   }
 }
+
+
+module.exports = { protect };

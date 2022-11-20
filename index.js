@@ -7,6 +7,7 @@ const connectDB = require('./config/db');
 
 const userR = require("./routes/user-routes");
 const confessR = require("./routes/confess-routes");
+const commentR = require("./routes/comment-router");
 
 //body-parse
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
@@ -29,6 +30,7 @@ app.get('/', (req, res) => {
 
 app.use("/api/user", userR);
 app.use("/api/confess", confessR);
+app.use("/api/comment", commentR);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
