@@ -9,7 +9,7 @@ const mongoose = require("mongoose");
 const getAllConfession = async (req, res, nxt) => {
   try {
     const count = await Confess.find({}).countDocuments();
-    const confessions = await Confess.find({})
+    const confessions = await Confess.find().sort({ $natural: -1 });
 
     return res.status(200).json({ response: confessions, count });
   }
