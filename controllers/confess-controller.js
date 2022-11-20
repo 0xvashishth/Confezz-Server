@@ -19,12 +19,10 @@ const getAllConfession = async (req, res, nxt) => {
 }
 
 const createConfession = async (req, res, nxt) => {
-  const form = formidable({ multiples: true });
-
-  form.parse(req, async (error, fields, files) => {
-    const { title, description, to } = fields;
+    const { title, description, to } = req.body;
     id = req.userId;
     author = req.author;
+    
     const errors = [];
     if (title === "") {
       errors.push({ msg: "Please add a title" });
@@ -32,18 +30,15 @@ const createConfession = async (req, res, nxt) => {
     if (description === "") {
       errors.push({ msg: "Please add a description" });
     }
-
-
     if (errors.length !== 0) {
       return res.status(400).json({ errors, files });
     }
     else {
       const newConfession = new Confess({ title, description, to, author, user: id });
-
+      
       let existingUser;
       try {
         existingUser = await User.findById(id);
-        console.log(existingUser);
       }
       catch (err) { return res.status(500).json({ errors: err, msg: err.message }) };
 
@@ -60,7 +55,6 @@ const createConfession = async (req, res, nxt) => {
       }
       catch (err) { return res.status(500).json({ errors: err, msg: err.message }) }
     }
-  });
 }
 
 
