@@ -75,5 +75,5 @@ const getConfessionByUser = async (req, res, nxt) => {
 
 module.exports = {
   getAllConfession,
-  createConfession
+  createConfession, getConfessionByUser
 };

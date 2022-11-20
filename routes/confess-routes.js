@@ -10,6 +10,6 @@ router.get("/", confessC.getAllConfession);
 router.post("/new", confessC.createConfession);
 
 // Fetch all confession by user
-router.get("/uc/:uid", auth, confessC.getConfessionByUser);
+router.get("/uc/:uid", confessC.getConfessionByUser);
 
 module.exports = router;
