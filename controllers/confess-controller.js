@@ -35,7 +35,7 @@ const createConfession = async (req, res, nxt) => {
       return res.status(400).json({ errors, files });
     }
     else {
-      const newConfession = new Confess({ title, description, to, author });
+      const newConfession = new Confess({ title, description, to, author, user: id });
 
       let existingUser;
       try {
@@ -58,6 +58,18 @@ const createConfession = async (req, res, nxt) => {
       catch (err) { return res.status(500).json({ errors: err, msg: err.message }) }
     }
   });
+}
+
+
+const getConfessionByUser = async (req, res, nxt) => {
+  const { uid } = req.params;
+  try {
+    const count = await Confess.find({ user: uid }).countDocuments();
+    const response = await Confess.find({ user: uid });
+
+    return res.status(200).json({ response: response, count });
+  }
+  catch (error) { return res.status(500).json({ errors: error, msg: error.message }); }
 }
 
 
