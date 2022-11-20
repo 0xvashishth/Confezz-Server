@@ -22,7 +22,9 @@ const createConfession = async (req, res, nxt) => {
   const form = formidable({ multiples: true });
 
   form.parse(req, async (error, fields, files) => {
-    const { id, title, description, author, to } = fields;
+    const { title, description, to } = fields;
+    id = req.userId;
+    author = req.author;
     const errors = [];
     if (title === "") {
       errors.push({ msg: "Please add a title" });
@@ -78,7 +80,7 @@ const getConfessionById = async (req, res, nxt) => {
   const { cid } = req.params;
   try {
     const confession = await Confess.findOne({ _id: cid });
-    const comments = await.Comment.find({ confessId: confession._id }).sort({ updatedAt: -1 });
+    const comments = await Comment.find({ confessId: confession._id }).sort({ updatedAt: -1 });
     return res.status(200).json({ confession, comments });
   } catch (error) { return res.status(500).json({ errors: error, msg: error.message }) }
 }

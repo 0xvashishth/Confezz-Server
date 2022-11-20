@@ -7,7 +7,7 @@ const auth = require("../middleware/auth");
 router.get("/", confessC.getAllConfession);
 
 // Create Confession
-router.post("/new", confessC.createConfession);
+router.post("/new", auth , confessC.createConfession);
 
 // Fetch all confession by user
 router.get("/uc/:uid", confessC.getConfessionByUser);
