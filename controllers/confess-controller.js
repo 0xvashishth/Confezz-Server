@@ -73,7 +73,15 @@ const getConfessionByUser = async (req, res, nxt) => {
 }
 
 
+const getConfessionById = async (req, res, nxt) => {
+  const { cid } = req.params;
+  try {
+    const confession = await Confess.findOne({ _id: cid });
+    return res.status(200).json({ confession });
+  } catch (error) { return res.status(500).json({ errors: error, msg: error.message }) }
+}
+
 module.exports = {
   getAllConfession,
-  createConfession, getConfessionByUser
+  createConfession, getConfessionByUser, getConfessionById
 };

@@ -12,4 +12,7 @@ router.post("/new", confessC.createConfession);
 // Fetch all confession by user
 router.get("/uc/:uid", confessC.getConfessionByUser);
 
+// Fetch perticular confession by id
+router.get("/c/:cid", confessC.getConfessionById);
+
 module.exports = router;
