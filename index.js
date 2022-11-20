@@ -5,7 +5,7 @@ const app = express();
 const connectDB = require('./config/db');
 
 const userR = require("./routes/user-routes");
-const confessR = require("./routes/confess-routes0");
+const confessR = require("./routes/confess-routes");
 
 //body-parse
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
