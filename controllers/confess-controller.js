@@ -8,8 +8,12 @@ const mongoose = require("mongoose");
 
 const getAllConfession = async (req, res, nxt) => {
   try {
+    const skip = req.query.skip ? Number(req.query.skip) : 0;
+    const DEFAULT_LIMIT = 5;
+
     const count = await Confess.find({}).countDocuments();
-    const confessions = await Confess.find().sort({ $natural: -1 });
+    // const confessions = await Confess.find().sort({ $natural: -1 });
+    const confessions = await Confess.find({}).skip(skip).limit(DEFAULT_LIMIT).sort({ updatedAt: -1 });
 
     return res.status(200).json({ response: confessions, count });
   }
@@ -19,42 +23,42 @@ const getAllConfession = async (req, res, nxt) => {
 }
 
 const createConfession = async (req, res, nxt) => {
-    const { title, description, to } = req.body;
-    id = req.userId;
-    author = req.author;
-    
-    const errors = [];
-    if (title === "") {
-      errors.push({ msg: "Please add a title" });
-    }
-    if (description === "") {
-      errors.push({ msg: "Please add a description" });
-    }
-    if (errors.length !== 0) {
-      return res.status(400).json({ errors, files });
-    }
-    else {
-      const newConfession = new Confess({ title, description, to, author, user: id });
-      
-      let existingUser;
-      try {
-        existingUser = await User.findById(id);
-      }
-      catch (err) { return res.status(500).json({ errors: err, msg: err.message }) };
+  const { title, description, to } = req.body;
+  id = req.userId;
+  author = req.author;
 
-      try {
-        const session = await mongoose.startSession();
-        session.startTransaction();
-        await newConfession.save({ session });
-        existingUser.confessions.push(newConfession);
-        await existingUser.save({ session });
-        await session.commitTransaction();
+  const errors = [];
+  if (title === "") {
+    errors.push({ msg: "Please add a title" });
+  }
+  if (description === "") {
+    errors.push({ msg: "Please add a description" });
+  }
+  if (errors.length !== 0) {
+    return res.status(400).json({ errors, files });
+  }
+  else {
+    const newConfession = new Confess({ title, description, to, author, user: id });
 
-        response = newConfession;
-        return res.status(200).json({ msg: "Your Confession has been created successfully", response });
-      }
-      catch (err) { return res.status(500).json({ errors: err, msg: err.message }) }
+    let existingUser;
+    try {
+      existingUser = await User.findById(id);
     }
+    catch (err) { return res.status(500).json({ errors: err, msg: err.message }) };
+
+    try {
+      const session = await mongoose.startSession();
+      session.startTransaction();
+      await newConfession.save({ session });
+      existingUser.confessions.push(newConfession);
+      await existingUser.save({ session });
+      await session.commitTransaction();
+
+      response = newConfession;
+      return res.status(200).json({ msg: "Your Confession has been created successfully", response });
+    }
+    catch (err) { return res.status(500).json({ errors: err, msg: err.message }) }
+  }
 }
 
 
