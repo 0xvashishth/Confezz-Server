@@ -11,6 +11,7 @@
 ---
 
 Website Link :link: : https://confezz.co/ 
+Another Link :link: : https://confezz.netlify.app/
 
 ---
 
